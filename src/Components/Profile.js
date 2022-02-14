@@ -1,22 +1,22 @@
 import React from "react";
-import { Navigate, useMatch, useNavigate } from "react-router-dom";
+import { Navigate, useMatch, useNavigate, useParams } from "react-router-dom";
 import { listofPersons } from "./../Constant/data";
 import { Card, Icon, Image, Button } from "semantic-ui-react";
 
 function Profile() {
+    // use params
+    const params = useParams();
+    const foundUser = listofPersons.find((el) => el.id == params.id);
     const navigate = useNavigate();
-    const match = useMatch("/user/profile/:id");
-    const foundUser = listofPersons.find((el) => el.id == match.params.id);
-    console.log(match.params.id);
+    // use match
+    // const match = useMatch("/user/profile/:id");
+    // const foundUser = listofPersons.find((el) => el.id == match.params.id);
+    console.log(params.id);
     return (
         <div>
             <h1>Profile</h1>
             <Card>
-                <Image
-                    src="/images/avatar/large/daniel.jpg"
-                    wrapped
-                    ui={false}
-                />
+                <Image src="/images/avatar/large/daniel.jpg" wrapped ui={false} />
                 <Card.Content>
                     <Card.Header>Name :{foundUser.name}</Card.Header>
                     <Card.Meta>Age : {foundUser.age}</Card.Meta>
